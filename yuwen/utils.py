@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
+
 import re
+import pytz
 
 # 判断是否合法电话
 def is_phone(phone):
@@ -13,3 +16,11 @@ def is_phone(phone):
         return True
     else:
         return False
+
+def get_datetime_without_sec(origin_date):
+    if not origin_date:
+        return ""
+
+    tz = pytz.timezone(settings.TIME_ZONE)
+    date = origin_date.astimezone(tz)
+    return date.strftime("%Y-%m-%d %H:%M")

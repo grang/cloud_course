@@ -39,15 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Cross-domain
     'corsheaders',
 
-    'apps.zone',
+    # rest
+    # 'rest_framework'
 
+    'apps.zone',
     'apps.course',
     'apps.role',
     'apps.institution',
-
     'apps.classroom',
+
+    'views'
 ]
 
 MIDDLEWARE = [

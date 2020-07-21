@@ -77,6 +77,12 @@ class ContactAdmin(admin.ModelAdmin):
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'name',
+        'phone'
+    ]
+
     readonly_fields = [
         'creator',
         'create_date'

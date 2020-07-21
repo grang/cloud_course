@@ -82,8 +82,20 @@ class InstStudent(models.Model):
     creator = models.ForeignKey(User, verbose_name="建立者", blank=True, null=True, on_delete=models.CASCADE)
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
 
+    def getName(self):
+        return self.student.name
+
     def __str__(self):
-        return "%s %s" % (self.institution.__str__(), self.student.__str__())
+        return self.student.__str__()
+        # return "%s %s" % (self.institution.__str__(), self.student.__str__())
+
+    def toDict(self):
+        return {
+            'id': self.id,
+            'name': self.student.name,
+            'finishRate': '98%',
+            'head': self.student.head
+        }
 
     class Meta:
         verbose_name = u"机构学生"
@@ -102,6 +114,9 @@ class InstCourse(models.Model):
 
     creator = models.ForeignKey(User, verbose_name="建立者", blank=True, null=True, on_delete=models.CASCADE)
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+
+    def getInstName(self):
+        return self.institution.title
 
     def __str__(self):
         return "%s %s" % (self.institution.__str__(), self.package.__str__())

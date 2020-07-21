@@ -30,4 +30,7 @@ admin.site.site_header = "语问管理平台"
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),
     path('admin/', admin.site.urls),
+
+    url(r'^api/', include('views.urls')),
+    # url(r'^api-auth/', include('rest_framework.urls'))
 ]
