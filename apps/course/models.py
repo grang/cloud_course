@@ -7,17 +7,25 @@ class Material(models.Model):
     PDF_TYPE, MP4_TYPE, IMG_TYPE, DOC_TYPE, EXCEL_TYPE, URL_TYPE = range(6)
 
     TYPE_LIST = [
-        (PDF_TYPE, 'PDF文档'),
-        (MP4_TYPE, '视频mp4'),
+        (PDF_TYPE, 'pdf'),
+        (MP4_TYPE, 'mp4'),
         (IMG_TYPE, '图片'),
-        (DOC_TYPE, 'DOC文档'),
-        (EXCEL_TYPE, 'Excel文档'),
-        (URL_TYPE, '链接内容')
+        (DOC_TYPE, 'DOC'),
+        (EXCEL_TYPE, 'Excel'),
+        (URL_TYPE, 'html')
     ]
 
     title = models.CharField(max_length=127, unique=True, verbose_name="名称")
     types = models.PositiveSmallIntegerField(default=0, choices=TYPE_LIST, verbose_name="类型")
     url = models.URLField(default="", verbose_name="地址链接")
+
+    def toDict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'url': self.url,
+            'type': self.TYPE_LIST[self.types][1]
+        }
 
     def __str__(self):
         return self.title

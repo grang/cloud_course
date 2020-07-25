@@ -107,7 +107,7 @@ class InstCourse(models.Model):
     institution = models.ForeignKey(Institution, verbose_name="对应机构", on_delete=models.CASCADE)
     package = models.ForeignKey(Package, verbose_name="机构解锁的课程", on_delete=models.CASCADE)
 
-    enabel = models.BooleanField(default=False, verbose_name="是否可以使用课程")
+    enable = models.BooleanField(default=False, verbose_name="是否可以使用课程")
 
     expired_date = models.DateField(verbose_name="过期时间", null=True, blank=True)
     actived_date = models.DateField(verbose_name="激活时间", null=True, blank=True)

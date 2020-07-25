@@ -13,7 +13,9 @@ logger = logging.getLogger(__name__)
 @admin.register(Institution)
 class InstitutionAdmin(admin.ModelAdmin):
     list_display = [
-        'title'
+        'id',
+        'title',
+        'sales'
     ]
 
     search_fields = [
@@ -80,6 +82,12 @@ class InstConcatAdmin(admin.ModelAdmin):
 
 @admin.register(InstTeacher)
 class InstTeacherAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'institution',
+        'teacher'
+    ]
+
     readonly_fields = [
         'creator',
         'create_date'
@@ -106,6 +114,15 @@ class InstStudentAdmin(admin.ModelAdmin):
 
 @admin.register(InstCourse)
 class InstCourseAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'institution',
+        'package',
+        'enable',
+        'actived_date',
+        'expired_date',
+    ]
+    
     readonly_fields = [
         'creator',
         'create_date'

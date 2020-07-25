@@ -2,12 +2,19 @@
 import logging
 import traceback
 
+from django.conf import settings
+
 from django.views.generic import View
 from django.http import JsonResponse
 from django.conf import settings
+from django.utils import timezone
 
 from apps.classroom.models import Classroom, Homework, StudentHomework
-from apps.institution.models import InstStudent
+from apps.institution.models import InstStudent, InstCourse
+from apps.role.models import Teacher, Student
+from apps.course.models import Ware
+
+from lib.wx.base import WeixinMiniBase
 
 from yuwen.utils import get_datetime_without_sec
 
@@ -167,3 +174,97 @@ class StudentInfoView(View):
             resp.update(code=1000, info='班级不存在')
         finally:
             return JsonResponse(resp, json_dumps_params={'ensure_ascii':False})
+
+# 获取老师所在机构的课程列表
+class ClasswareListView(View):
+    def get(self, request):
+        resp = {"code": 0}
+        try:
+            # 机构ID
+            iid = request.GET.get('id')
+            now = timezone.now()
+
+            courses = InstCourse.objects.filter(institution__id=iid, enable=True, expired_date__gte=now)
+
+            data = []
+            for course in courses:
+                wares = Ware.objects.filter(package=course.package)
+                for ware in wares:
+                    for mat in ware.material.all():
+                        data.append(mat.toDict())
+
+            resp['data'] = data
+        except Exception as e:
+            logger.error(e)
+            resp.update(code=1000, info='机构不存在')
+        finally:
+            return JsonResponse(resp, json_dumps_params={'ensure_ascii':False})
+
+
+class LoginView(View):
+    def post(self, request):
+        code = request.POST.get('code')
+        role = request.POST.get('role') # teacher: 表示教师  student： 表示学生
+        classroomId - request.POST.get('classroomId', '')
+
+        name = request.POST.get('name')
+        head = request.POST.get('head')
+        gender = request.POST.get('gender')
+        city = request.POST.get('city')
+        province = request.POST.get('province')
+        country = request.POST.get('country')
+
+        mini_base = WeixinMiniBase.get_instance(settings.WX_MINI_APP_ID, settings.WX_MINI_APP_SECRECT)
+        result = mini_base.get_miniprogram_session(code)
+        if result['errcode'] == 0:
+            openid = result['openid']
+            unionid = result['unionid']
+            session_key = result['session_key']
+
+            if role == 'student':
+                student = Student.objects.filter(openid=openid).first()
+                if student:
+                    student.wx_session = session_key
+                    student.name = name
+                    student.head = head
+                    student.gender = gender
+                    student.country = country
+                    student.province = province
+                    student.city = city 
+                    student.save()
+                else:
+                    student = Student(name=name, phone=openid, head=head, openid=openid, unionid=unionid, wx_session=session_key, gender=int(gender), country=country, province=province, city=city)
+                    student.save()
+
+                classroom = Classroom.objects.filter(id=classroomId).first()
+                if not classroom:
+                    return JsonResponse({"code": 1001, "info": "班级不存在"})
+
+                instStudent = InstStudent.objects.filter(student=student).first()
+                if not instStudent:
+                    instStudent = InstStudent(institution=classroom.institution, studnet=student)
+                    instStudent.save()
+
+                # 给班级添加学生
+                if not classroom.students.filter(id=instStudent.id).first():
+                    classroom.students.add(instStudent)
+
+                data = {
+                    'id': instStudent.id,
+                    'role': role,
+                    'name': name,
+                    'head': head,
+                    'gender': gender
+                }
+
+                return JsonResponse({"code": 0, "data": data})
+
+
+            # if role == 'teacher':
+            #     teacher = Teacher.objects.filter(openid=openid).first()
+            #     if teacher:
+            #         pass
+            #     else:
+            #         pass
+        else:
+            return JsonResponse({"code": 1000, "info": "微信授权出错"})

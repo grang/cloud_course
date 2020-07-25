@@ -4,5 +4,6 @@
 *.log
 
 migrations/
-
 __pycache__/
+__pycache__/*
+

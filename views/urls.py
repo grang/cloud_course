@@ -3,7 +3,8 @@ from django.urls import include, path, re_path
 from django.views.static import serve
 from django.conf import settings
 
-from views.api_views import TestView, ClassroomView, ClassroomInfoView, ClassroomStudents, HomeworkView, StudentHomeworkListView, StudentInfoView
+from views.api_views import TestView, ClassroomView, ClassroomInfoView, ClassroomStudents, HomeworkView, StudentHomeworkListView, StudentInfoView, ClasswareListView
+from views.api_views import LoginView
 
 urlpatterns = [
     re_path('test/$', TestView.as_view()),
@@ -25,4 +26,10 @@ urlpatterns = [
 
     # 班级学生的作业列表
     re_path('students_homework_list/$', StudentHomeworkListView.as_view()),
+
+    # 课件列表
+    re_path('classwares/$', ClasswareListView.as_view()),
+
+    # 用户登录
+    re_path('login/$', LoginView.as_view()),
 ]
