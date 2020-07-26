@@ -206,7 +206,7 @@ class LoginView(View):
     def post(self, request):
         code = request.POST.get('code')
         logger.debug("code is %s" % code)
-        
+
         role = request.POST.get('role') # teacher: 表示教师  student： 表示学生
         classroomId = request.POST.get('classroomId')
 
@@ -223,7 +223,7 @@ class LoginView(View):
         logger.debug("result is %s" % json.dumps(result))
         print(result)
 
-        if result['errcode'] == 0:
+        if not 'errcode' in result:
             openid = result['openid']
             unionid = result['unionid']
             session_key = result['session_key']
