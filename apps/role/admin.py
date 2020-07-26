@@ -96,7 +96,27 @@ class TeacherAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+        'openid',
+        'head',
+        'wx_session',
+        'gender',
+        'country',
+        'province',
+        'city'
+    ]
+
     readonly_fields = [
+        'name',
+        'openid',
+        'head',
+        'wx_session',
+        'gender',
+        'country',
+        'province',
+        'city'
+
         'creator',
         'create_date'
     ]
