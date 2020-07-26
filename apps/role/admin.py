@@ -2,6 +2,8 @@
 from django.contrib import admin, messages
 from django.conf import settings
 
+from django.utils.safestring import mark_safe
+
 from django.contrib.auth.models import User
 from .models import *
 
