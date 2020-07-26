@@ -225,7 +225,7 @@ class LoginView(View):
 
         if not 'errcode' in result:
             openid = result['openid']
-            unionid = result['unionid']
+            # unionid = result['unionid']
             session_key = result['session_key']
 
 
@@ -242,7 +242,7 @@ class LoginView(View):
                     student.save()
                 else:
                     # student = Student(phone=openid, openid=openid, wx_session=session_key)
-                    student = Student(name=name, phone=openid, head=head, openid=openid, unionid=unionid, wx_session=session_key, gender=int(gender), country=country, province=province, city=city)
+                    student = Student(name=name, phone=openid, head=head, openid=openid, wx_session=session_key, gender=int(gender), country=country, province=province, city=city)
                     student.save()
 
                 classroom = Classroom.objects.filter(id=classroomId).first()
