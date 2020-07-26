@@ -99,7 +99,7 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = [
         'name',
         'openid',
-        'head',
+        'show_head',
         'wx_session',
         'gender',
         'country',
@@ -120,6 +120,10 @@ class StudentAdmin(admin.ModelAdmin):
         'creator',
         'create_date'
     ]
+
+    def show_head(self, obj):
+        return mark_safe("<img src='%s' width=100 height=100 />" % obj.head)
+    show_head.short_description = "头像"
     
     def save_model(self, request, obj, form, change):
         if is_phone(obj.phone):
