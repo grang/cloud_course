@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     # rest
     # 'rest_framework'
 
-    'apps.zone',
+    # 'apps.zone',
     'apps.course',
     'apps.role',
     'apps.institution',
