@@ -1,6 +1,7 @@
 # coding=utf-8
 import logging
 import traceback
+import json
 
 from django.conf import settings
 
@@ -204,8 +205,10 @@ class ClasswareListView(View):
 class LoginView(View):
     def post(self, request):
         code = request.POST.get('code')
+        logger.debug("code is %s" % code)
+        
         role = request.POST.get('role') # teacher: 表示教师  student： 表示学生
-        classroomId - request.POST.get('classroomId', '')
+        classroomId = request.POST.get('classroomId')
 
         name = request.POST.get('name')
         head = request.POST.get('head')
@@ -216,10 +219,15 @@ class LoginView(View):
 
         mini_base = WeixinMiniBase.get_instance(settings.WX_MINI_APP_ID, settings.WX_MINI_APP_SECRECT)
         result = mini_base.get_miniprogram_session(code)
+
+        logger.debug("result is %s" % json.dumps(result))
+        print(result)
+
         if result['errcode'] == 0:
             openid = result['openid']
             unionid = result['unionid']
             session_key = result['session_key']
+
 
             if role == 'student':
                 student = Student.objects.filter(openid=openid).first()
@@ -233,6 +241,7 @@ class LoginView(View):
                     student.city = city 
                     student.save()
                 else:
+                    # student = Student(phone=openid, openid=openid, wx_session=session_key)
                     student = Student(name=name, phone=openid, head=head, openid=openid, unionid=unionid, wx_session=session_key, gender=int(gender), country=country, province=province, city=city)
                     student.save()
 
@@ -251,6 +260,7 @@ class LoginView(View):
 
                 data = {
                     'id': instStudent.id,
+                    'openid': openid,
                     'role': role,
                     'name': name,
                     'head': head,
@@ -258,7 +268,6 @@ class LoginView(View):
                 }
 
                 return JsonResponse({"code": 0, "data": data})
-
 
             # if role == 'teacher':
             #     teacher = Teacher.objects.filter(openid=openid).first()

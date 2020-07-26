@@ -194,4 +194,4 @@ FILE_ROOT = os.path.join(BASE_DIR, '../files').replace("\\", "/")
 
 # 微信小程序配置
 WX_MINI_APP_ID = 'wx1594236d03b9f1b3'
-WX_MINI_APP_SECRECT = ''
+WX_MINI_APP_SECRECT = '850b6efaf54fe08950c322d7074d82c2'
