@@ -191,3 +191,7 @@ LOGGING = {
 DEFAULT_PWD = "Yuwen123456"
 
 FILE_ROOT = os.path.join(BASE_DIR, '../files').replace("\\", "/")
+
+# 微信小程序配置
+WX_MINI_APP_ID = ''
+WX_MINI_APP_SECRECT = ''
