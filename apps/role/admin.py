@@ -11,6 +11,18 @@ from yuwen.utils import is_phone
 
 @admin.register(Sales)
 class SalesAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+        'phone',
+        'email'
+    ]
+
+    search_fields = [
+        'name',
+        'phone',
+        'email'
+    ]
+
     readonly_fields = [
         'creator',
         'create_date',
@@ -39,6 +51,18 @@ class SalesAdmin(admin.ModelAdmin):
 
 @admin.register(Manager)
 class ManagerAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+        'phone',
+        'email'
+    ]
+
+    search_fields = [
+        'name',
+        'phone',
+        'email'
+    ]
+
     readonly_fields = [
         'creator',
         'create_date',
@@ -66,6 +90,11 @@ class ManagerAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+        'phone'
+    ]
+
     readonly_fields = [
         'creator',
         'create_date'
