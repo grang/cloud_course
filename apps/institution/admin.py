@@ -44,6 +44,12 @@ class InstitutionAdmin(admin.ModelAdmin):
 
 @admin.register(InstManager)
 class InstManagerAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'institution',
+        'manager'
+    ]
+
     readonly_fields = [
         'creator',
         'create_date'
@@ -68,6 +74,12 @@ class InstManagerAdmin(admin.ModelAdmin):
 
 @admin.register(InstConcat)
 class InstConcatAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'institution',
+        'concat'
+    ]
+
     readonly_fields = [
         'creator',
         'create_date'
@@ -101,6 +113,12 @@ class InstTeacherAdmin(admin.ModelAdmin):
 
 @admin.register(InstStudent)
 class InstStudentAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'institution',
+        'student'
+    ]
+
     readonly_fields = [
         'creator',
         'create_date'
