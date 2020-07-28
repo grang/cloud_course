@@ -146,8 +146,8 @@ class StudentAdmin(admin.ModelAdmin):
         'gender',
         'country',
         'province',
-        'city'
-
+        'city',
+        
         'creator',
         'create_date'
     ]
