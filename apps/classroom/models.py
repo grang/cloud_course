@@ -27,7 +27,7 @@ class Classroom(models.Model):
     teacher = models.ForeignKey(InstTeacher, verbose_name="班主任", on_delete=models.SET_NULL, related_name="master_teacher", blank=True, null=True)
     # slave_teacher = models.ManyToManyField(InstTeacher, verbose_name="辅助老师", related_name="slave_teacher")
 
-    students = models.ManyToManyField(InstStudent, verbose_name="学生")
+    students = models.ManyToManyField(InstStudent, verbose_name="学生", blank=True)
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
 
     def toDict(self):
