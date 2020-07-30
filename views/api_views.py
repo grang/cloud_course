@@ -284,7 +284,7 @@ class WxPhoneView(View):
     获取微信的电话
     '''
     def post(self, request):
-        code = request.POST.get('code')
+        wxCode = request.POST.get('code')
         data = request.POST.get('data')
         iv = request.POST.get('iv')
 
@@ -297,10 +297,9 @@ class WxPhoneView(View):
         phone = ''
         if code:
             mini_base = WeixinMiniBase.get_instance(settings.WX_MINI_APP_ID, settings.WX_MINI_APP_SECRECT)
-            result = mini_base.get_miniprogram_session(code)
+            result = mini_base.get_miniprogram_session(wxCode)
 
             logger.debug("result is %s" % json.dumps(result))
-            print(result)
 
             if not 'errcode' in result:
                 openid = result['openid']
@@ -329,7 +328,7 @@ class WxPhoneView(View):
                             # TODO: 
                             code = 101
                     else:
-                        teacher = Teacher(phone=phone, name=phone, openid=phone)
+                        teacher = Teacher(phone=phone, name=phone, openid=openid)
                         teacher.save() 
 
                         code = 101
