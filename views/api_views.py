@@ -289,7 +289,7 @@ class WxPhoneView(View):
         iv = request.POST.get('iv')
 
         if not iv or iv == 'undefined':
-            return JsonResponse({"code":1001, "data":"微信认证数据失败!"})
+            return JsonResponse({"code":1003, "data":"微信认证数据失败!"})
 
         code = 0
         teacherId = ''
@@ -341,6 +341,8 @@ class WxPhoneView(View):
                 except Exception as e:
                     logger.exception(e)
                     logger.error("data is %s, iv is %s" % (data, iv))
+                    logger.error(traceback.format_exc())
+
                     res_code = 1001
                 finally:
                     return JsonResponse({'code': code, data:{'phone': phone, 'teacherId': teacherId, 'instId': instId}})
