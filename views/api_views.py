@@ -306,12 +306,13 @@ class WxPhoneView(View):
                 session_key = result['session_key']
 
                 pc = WXBizDataCrypt(settings.WX_MINI_APP_ID, session_key)
-                my_session = ''
-                res_code = 1000
                 try:
+                    logger.error(data)
+                    logger.error(iv)
+                    
                     res = pc.decrypt(data, iv)
                     phone = res['phoneNumber']
-                    logger.error("phone is %s" % phone)
+                    # logger.error("phone is %s" % phone)
 
                     # TODO：根据教师电话去找机构里是否有相同的
                     # 如果没有电话，则新建一个
@@ -336,7 +337,7 @@ class WxPhoneView(View):
                 except Exception as e:
                     logger.error(traceback.format_exc())
 
-                    res_code = 1001
+                    code = 1001
                 finally:
                     return JsonResponse({'code': code, 'data':{'phone': phone, 'teacherId': teacherId, 'instId': instId}})
             else:
