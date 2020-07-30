@@ -342,7 +342,7 @@ class WxPhoneView(View):
 
                     code = 1001
                 finally:
-                    return JsonResponse({'code': code, 'data':{'phone': phone, 'teacherId': teacherId, 'instId': instId, 'name': teacherName}})
+                    return JsonResponse({'code': code, 'data':{'phone': phone, 'teacherId': teacherId, 'instId': instId, 'teacherName': teacherName}})
             else:
                 return JsonResponse({'code': obj['errcode']})
         else:
