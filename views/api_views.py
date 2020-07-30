@@ -325,7 +325,6 @@ class WxPhoneView(View):
                             teacherId = instTeacher.id
                             instId = instTeacher.institution.id 
                         else:
-                            # TODO: 
                             code = 101
                     else:
                         teacher = Teacher(phone=phone, name=phone, openid=openid)
@@ -334,18 +333,12 @@ class WxPhoneView(View):
                         code = 101
                         phone = phone
 
-                    # if not is_login or is_login == '1':
-                    #     my_session = Session.generate_session(appkey, phone, openid, session_key, request)
-                    #     if my_session == '':
-                    #         res_code = 10002
                 except Exception as e:
-                    logger.exception(e)
-                    logger.error("data is %s, iv is %s" % (data, iv))
                     logger.error(traceback.format_exc())
 
                     res_code = 1001
                 finally:
-                    return JsonResponse({'code': code, data:{'phone': phone, 'teacherId': teacherId, 'instId': instId}})
+                    return JsonResponse({'code': code, 'data':{'phone': phone, 'teacherId': teacherId, 'instId': instId}})
             else:
                 return JsonResponse({'code': obj['errcode']})
         else:
