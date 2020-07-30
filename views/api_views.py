@@ -11,7 +11,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from apps.classroom.models import Classroom, Homework, StudentHomework
-from apps.institution.models import InstStudent, InstCourse
+from apps.institution.models import InstStudent, InstCourse, InstTeacher
 from apps.role.models import Teacher, Student
 from apps.course.models import Ware
 
@@ -291,6 +291,9 @@ class WxPhoneView(View):
         if not iv or iv == 'undefined':
             return JsonResponse({"code":1001, "data":"微信认证数据失败!"})
 
+        code = 0
+        teacherId = ''
+        instId = ''
         phone = ''
         if code:
             mini_base = WeixinMiniBase.get_instance(settings.WX_MINI_APP_ID, settings.WX_MINI_APP_SECRECT)
@@ -311,6 +314,27 @@ class WxPhoneView(View):
                     phone = res['phoneNumber']
                     logger.error("phone is %s" % phone)
 
+                    # TODO：根据教师电话去找机构里是否有相同的
+                    # 如果没有电话，则新建一个
+
+                    teacher = Teacher.objects.filter(phone=phone).first()
+                    if teacher:
+                        instTeacher = InstTeacher.objects.filter(teacher=teacher).first()
+                        if instTeacher:
+                            code = 0
+                            phone = phone
+                            teacherId = instTeacher.id
+                            instId = instTeacher.institution.id 
+                        else:
+                            # TODO: 
+                            code = 101
+                    else:
+                        teacher = Teacher(phone=phone, name=phone, openid=phone)
+                        teacher.save() 
+
+                        code = 101
+                        phone = phone
+
                     # if not is_login or is_login == '1':
                     #     my_session = Session.generate_session(appkey, phone, openid, session_key, request)
                     #     if my_session == '':
@@ -320,7 +344,7 @@ class WxPhoneView(View):
                     logger.error("data is %s, iv is %s" % (data, iv))
                     res_code = 1001
                 finally:
-                    return JsonResponse({'code': 0, data:{'phone': phone}})
+                    return JsonResponse({'code': code, data:{'phone': phone, 'teacherId': teacherId, 'instId': instId}})
             else:
                 return JsonResponse({'code': obj['errcode']})
         else:
