@@ -309,7 +309,8 @@ class WxPhoneView(View):
                 try:
                     logger.error(data)
                     logger.error(iv)
-                    
+                    logger.error(session_key)
+
                     res = pc.decrypt(data, iv)
                     phone = res['phoneNumber']
                     # logger.error("phone is %s" % phone)
