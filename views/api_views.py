@@ -303,7 +303,7 @@ class WxPhoneView(View):
                 openid = result['openid']
                 session_key = result['session_key']
 
-                pc = WXBizDataCrypt(settings.SMALL_APP_ID, session_key)
+                pc = WXBizDataCrypt(settings.WX_MINI_APP_ID, session_key)
                 my_session = ''
                 res_code = 1000
                 try:
