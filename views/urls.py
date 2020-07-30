@@ -4,7 +4,7 @@ from django.views.static import serve
 from django.conf import settings
 
 from views.api_views import TestView, ClassroomView, ClassroomInfoView, ClassroomStudents, HomeworkView, StudentHomeworkListView, StudentInfoView, ClasswareListView
-from views.api_views import LoginView
+from views.api_views import LoginView, WxPhoneView
 
 urlpatterns = [
     re_path('test/$', TestView.as_view()),
@@ -32,4 +32,6 @@ urlpatterns = [
 
     # 用户登录
     re_path('login/$', LoginView.as_view()),
+    # 电话获得
+    re_path('wx_phone/$', WxPhoneView.as_view()),
 ]

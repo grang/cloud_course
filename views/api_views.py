@@ -15,7 +15,7 @@ from apps.institution.models import InstStudent, InstCourse
 from apps.role.models import Teacher, Student
 from apps.course.models import Ware
 
-from lib.wx.base import WeixinMiniBase
+from lib.wx.base import WeixinMiniBase, WXBizDataCrypt
 
 from yuwen.utils import get_datetime_without_sec
 
@@ -277,3 +277,51 @@ class LoginView(View):
             #         pass
         else:
             return JsonResponse({"code": 1000, "info": "微信授权出错"})
+
+# 获取微信手机号，教师登录
+class WxPhoneView(View):
+    '''
+    获取微信的电话
+    '''
+    def post(self, request):
+        code = request.POST.get('code')
+        data = request.POST.get('data')
+        iv = request.POST.get('iv')
+
+        if not iv or iv == 'undefined':
+            return JsonResponse({"code":1001, "data":"微信认证数据失败!"})
+
+        phone = ''
+        if code:
+            mini_base = WeixinMiniBase.get_instance(settings.WX_MINI_APP_ID, settings.WX_MINI_APP_SECRECT)
+            result = mini_base.get_miniprogram_session(code)
+
+            logger.debug("result is %s" % json.dumps(result))
+            print(result)
+
+            if not 'errcode' in result:
+                openid = result['openid']
+                session_key = result['session_key']
+
+                pc = WXBizDataCrypt(settings.SMALL_APP_ID, session_key)
+                my_session = ''
+                res_code = 1000
+                try:
+                    res = pc.decrypt(data, iv)
+                    phone = res['phoneNumber']
+                    logger.error("phone is %s" % phone)
+
+                    # if not is_login or is_login == '1':
+                    #     my_session = Session.generate_session(appkey, phone, openid, session_key, request)
+                    #     if my_session == '':
+                    #         res_code = 10002
+                except Exception as e:
+                    logger.exception(e)
+                    logger.error("data is %s, iv is %s" % (data, iv))
+                    res_code = 1001
+                finally:
+                    return JsonResponse({'code': 0, data:{'phone': phone}})
+            else:
+                return JsonResponse({'code': obj['errcode']})
+        else:
+            return JsonResponse({'code': 1002})
