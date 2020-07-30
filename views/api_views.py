@@ -295,6 +295,7 @@ class WxPhoneView(View):
         teacherId = ''
         instId = ''
         phone = ''
+        teacherName = ''
         if wxCode:
             mini_base = WeixinMiniBase.get_instance(settings.WX_MINI_APP_ID, settings.WX_MINI_APP_SECRECT)
             result = mini_base.get_miniprogram_session(wxCode)
@@ -326,6 +327,7 @@ class WxPhoneView(View):
                             phone = phone
                             teacherId = instTeacher.id
                             instId = instTeacher.institution.id 
+                            teacherName = teacher.name
                         else:
                             code = 101
                     else:
@@ -340,7 +342,7 @@ class WxPhoneView(View):
 
                     code = 1001
                 finally:
-                    return JsonResponse({'code': code, 'data':{'phone': phone, 'teacherId': teacherId, 'instId': instId}})
+                    return JsonResponse({'code': code, 'data':{'phone': phone, 'teacherId': teacherId, 'instId': instId, 'name': teacherName}})
             else:
                 return JsonResponse({'code': obj['errcode']})
         else:
