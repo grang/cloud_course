@@ -295,7 +295,7 @@ class WxPhoneView(View):
         teacherId = ''
         instId = ''
         phone = ''
-        if code:
+        if wxCode:
             mini_base = WeixinMiniBase.get_instance(settings.WX_MINI_APP_ID, settings.WX_MINI_APP_SECRECT)
             result = mini_base.get_miniprogram_session(wxCode)
 
