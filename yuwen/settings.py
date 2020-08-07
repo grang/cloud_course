@@ -25,7 +25,7 @@ SECRET_KEY = '-8w3#9itnaz$+2j2ogn#u$23tlxm$r=gims%=h_$ibh05*!fp$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '106.52.92.203', 'yuwen.img2txt.cn']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '106.52.92.203', 'yuwen.img2txt.cn', 'wx.yuwenke100.com']
 
 
 # Application definition
