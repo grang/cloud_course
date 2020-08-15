@@ -31,7 +31,9 @@ class ClassroomView(View):
     def get(self, request):
         resp = {"code": 0}
         try:
-            tid = request.GET.get('teacherId')
+            tid = request.GET.get('teacherId', '')
+            if tid == '':
+                return JsonResponse(code=1001, info='参数Tid为空')
 
             classrooms = Classroom.objects.filter(teacher__id=tid)
         
