@@ -32,7 +32,8 @@ class ClassroomView(View):
         resp = {"code": 0}
         try:
             tid = request.GET.get('teacherId', '')
-            if tid == '':
+
+            if tid == '' or tid == 'null':
                 return JsonResponse(code=1001, info='参数Tid为空')
 
             classrooms = Classroom.objects.filter(teacher__id=tid)
