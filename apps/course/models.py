@@ -18,7 +18,7 @@ class Material(models.Model):
 
     title = models.CharField(max_length=127, unique=True, verbose_name="名称")
     types = models.PositiveSmallIntegerField(default=0, choices=TYPE_LIST, verbose_name="类型")
-    url = models.URLField(default="", verbose_name="地址链接")
+    url = models.URLField(default="", verbose_name="地址链接", blank=True)
 
     def toDict(self):
         return {
