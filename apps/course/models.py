@@ -4,7 +4,7 @@ from django.conf import settings
 
 # 课程材料
 class Material(models.Model):
-    PDF_TYPE, MP4_TYPE, IMG_TYPE, DOC_TYPE, EXCEL_TYPE, URL_TYPE = range(6)
+    PDF_TYPE, MP4_TYPE, IMG_TYPE, DOC_TYPE, EXCEL_TYPE, URL_TYPE, PPT_TYPE = range(7)
 
     TYPE_LIST = [
         (PDF_TYPE, 'pdf'),
@@ -12,7 +12,8 @@ class Material(models.Model):
         (IMG_TYPE, '图片'),
         (DOC_TYPE, 'DOC'),
         (EXCEL_TYPE, 'Excel'),
-        (URL_TYPE, 'html')
+        (URL_TYPE, 'html'),
+        (PPT_TYPE, 'ppt')
     ]
 
     title = models.CharField(max_length=127, unique=True, verbose_name="名称")
