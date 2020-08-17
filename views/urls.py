@@ -3,7 +3,7 @@ from django.urls import include, path, re_path
 from django.views.static import serve
 from django.conf import settings
 
-from views.api_views import TestView, ClassroomView, ClassroomInfoView, ClassroomStudents, HomeworkView, StudentHomeworkListView, StudentInfoView, ClasswareListView
+from views.api_views import TestView, ClassroomView, ClassroomNamesView, ClassroomInfoView, ClassroomStudents, HomeworkView, StudentHomeworkListView, StudentInfoView, ClasswareListView
 from views.api_views import LoginView, WxPhoneView
 
 urlpatterns = [
@@ -14,6 +14,9 @@ urlpatterns = [
 
     # 获得班级信息
     re_path('classroom/info/$', ClassroomInfoView.as_view()),
+
+    # 获得班级课程
+    re_path('classroom/course/nams/$', ClassroomNamesView.as_view()),
 
     # 获得班级下学生列表
     re_path('students/$', ClassroomStudents.as_view()),

@@ -64,6 +64,27 @@ class ClassroomInfoView(View):
         finally:
             return JsonResponse(resp, json_dumps_params={'ensure_ascii':False})
 
+class ClassroomNamesView(View):
+    def get(self, request):
+        resp = {"code": 0}
+        try:
+            cid = request.GET.get('classroomId')
+            classroom = Classroom.objects.get(id=cid)
+
+            packages = classroom.packages.all()
+
+            data = []
+            for package in packages:
+                data.append(package.title)
+                
+            resp['data'] = data
+        except Exception as e:
+            logger.error(e)
+            resp.update(code=1000, info='没有此班级')
+        finally:
+            return JsonResponse(resp, json_dumps_params={'ensure_ascii':False})
+
+
 class ClassroomStudents(View):
     def get(self, request):
         resp = {"code": 0}
