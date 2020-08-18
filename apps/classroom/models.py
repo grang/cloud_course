@@ -50,11 +50,11 @@ class Classroom(models.Model):
 
 class Homework(models.Model):
     classroom = models.ForeignKey(Classroom, verbose_name="对应班级", on_delete=models.CASCADE)
-    ware = models.ForeignKey(Ware, verbose_name="对应课节", on_delete=models.CASCADE, null=True)
+    package = models.ForeignKey(Package, verbose_name="对应课程", on_delete=models.CASCADE, null=True, blank=True)
 
     title = models.CharField(max_length=127, verbose_name="作业标题")
     content = models.TextField(default="", verbose_name="作业内容")
-    finish_date = models.DateTimeField(verbose_name="作业截止时间")
+    finish_date = models.DateTimeField(verbose_name="作业截止时间", null=True, blank=True)
 
     img1 = models.URLField(default="", blank=True, verbose_name="作业附图1")
     img2 = models.URLField(default="", blank=True, verbose_name="作业附图2")
@@ -67,9 +67,9 @@ class Homework(models.Model):
     def getInstName(self):
         return self.classroom.institution.title
 
-    def getWareName(self):
-        if self.ware:
-            return self.ware.title
+    def getPackageName(self):
+        if self.package:
+            return self.package.title
         return ""
 
     def __str__(self):
@@ -112,7 +112,7 @@ class StudentHomework(models.Model):
             'id': self.id,
             'title': self.homework.title,
             'classroomId': self.homework.classroom.id,
-            'courseName': self.homework.getWareName(),
+            'courseName': self.homework.getPackageName(),
             'publishedDate': get_datetime_without_sec(self.homework.create_date),
             'endDate': get_datetime_without_sec(self.homework.finish_date)
         }

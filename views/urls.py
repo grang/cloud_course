@@ -3,7 +3,8 @@ from django.urls import include, path, re_path
 from django.views.static import serve
 from django.conf import settings
 
-from views.api_views import TestView, ClassroomView, ClassroomNamesView, ClassroomInfoView, ClassroomStudents, HomeworkView, StudentHomeworkListView, StudentInfoView, ClasswareListView
+from views.api_views import TestView, ClassroomView, ClassroomNamesView, ClassroomInfoView, ClassroomStudents, StudentHomeworkListView, StudentInfoView, ClasswareListView
+from views.api_views import HomeworkView, HomeworkImgUpload, HomeworkUpload
 from views.api_views import LoginView, WxPhoneView
 
 urlpatterns = [
@@ -26,6 +27,12 @@ urlpatterns = [
 
     # 作业列表
     re_path('homewoks/$', HomeworkView.as_view()),
+
+    # 作业图片上传
+    re_path('homework/img/upload/$', HomeworkImgUpload.as_view()),
+
+    # 作业上传
+    re_path('homework/upload/$', HomeworkUpload.as_view()),
 
     # 班级学生的作业列表
     re_path('students_homework_list/$', StudentHomeworkListView.as_view()),

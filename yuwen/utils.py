@@ -3,6 +3,7 @@ from django.conf import settings
 
 import re
 import pytz
+import datetime
 
 # 判断是否合法电话
 def is_phone(phone):
@@ -24,3 +25,9 @@ def get_datetime_without_sec(origin_date):
     tz = pytz.timezone(settings.TIME_ZONE)
     date = origin_date.astimezone(tz)
     return date.strftime("%Y-%m-%d %H:%M")
+
+def strp_date(value):
+    if value == "":
+        return ""
+
+    return datetime.datetime.strptime(value, '%Y-%m-%d')

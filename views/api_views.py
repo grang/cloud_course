@@ -2,6 +2,7 @@
 import logging
 import traceback
 import json
+import os
 
 from django.conf import settings
 
@@ -13,11 +14,14 @@ from django.utils import timezone
 from apps.classroom.models import Classroom, Homework, StudentHomework
 from apps.institution.models import InstStudent, InstCourse, InstTeacher
 from apps.role.models import Teacher, Student
-from apps.course.models import Ware
+from apps.course.models import Ware, Package
 
+from lib.file_store import oss_save_file
 from lib.wx.base import WeixinMiniBase, WXBizDataCrypt
+from lib.IDGen import IdGenerator
 
-from yuwen.utils import get_datetime_without_sec
+from yuwen.utils import get_datetime_without_sec, strp_date
+
 
 
 logger = logging.getLogger(__name__)
@@ -73,11 +77,15 @@ class ClassroomNamesView(View):
 
             packages = classroom.packages.all()
 
+            # homework = Homework(classroom=classroom)
+            # homework.save()
+
             data = []
             for package in packages:
                 data.append(package.title)
-                
+
             resp['data'] = data
+            # resp['homeworkId'] = homework.id
         except Exception as e:
             logger.error(e)
             resp.update(code=1000, info='没有此班级')
@@ -124,6 +132,66 @@ class HomeworkView(View):
         except Exception as e:
             logger.error(e)
             resp.update(code=1000, info='班级不存在')
+        finally:
+            return JsonResponse(resp, json_dumps_params={'ensure_ascii':False})
+
+class HomeworkUpload(View):
+    def post(self, request):
+        resp = {"code": 0}
+        try:
+            cid = request.POST.get('classroomId')
+            content = request.POST.get('content')
+            course = request.POST.get('course') # course name
+            fileUrl0 = request.POST.get('fileUrl0', '')
+            fileUrl1 = request.POST.get('fileUrl1', '')
+            fileUrl2 = request.POST.get('fileUrl2', '')
+            title = request.POST.get('title')
+            date = request.POST.get('date')
+
+            classroom = Classroom.objects.get(id=cid)
+            package = Package.objects.get(title=course)
+
+            finishDate = strp_date(date)
+
+            homework = Homework(
+                classroom=classroom,
+                package=package,
+                title=title,
+                content=content,
+                img1=fileUrl0,
+                img2=fileUrl1,
+                img3=fileUrl2,
+                finish_date=finishDate
+            )
+            homework.save()
+
+        except Exception as e:
+            logger.error(e)
+            resp.update(code=1000, info='数据出错')
+        finally:
+            return JsonResponse(resp, json_dumps_params={'ensure_ascii':False})
+
+class HomeworkImgUpload(View):
+    def post(self, request):
+        resp = {"code": 0}
+        try:
+            image = request.FILES['file']
+
+            file_name = image.name
+            print(file_name)
+            # logger.error("on post %s" % file_name)
+            file_ext = os.path.splitext(file_name)[1].lower()
+            ids = IdGenerator.gen()
+
+            file_name = 'app/yuwen/homework/%s%s' % (ids, file_ext)
+            print("upload file name is %s" % file_name)
+
+            oss_save_file(file_name, image.read())
+
+            resp['url'] = '%s/%s' % (settings.OSS_PREFIX, file_name)
+        except Exception as e:
+            logger.error(e)
+            resp.update(code=1000, info='作业不存在')
         finally:
             return JsonResponse(resp, json_dumps_params={'ensure_ascii':False})
 

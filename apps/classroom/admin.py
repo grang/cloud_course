@@ -11,8 +11,8 @@ class ClassroomAdmin(admin.ModelAdmin):
 
 @admin.register(Homework)
 class HomeworkAdmin(admin.ModelAdmin):
-    list_display = ["id", "classroom", "ware", "title", "finish_date", "create_date", "showInst"]
-    list_filter = ["ware__package"]
+    list_display = ["id", "classroom", "package", "title", "finish_date", "create_date", "showInst"]
+    list_filter = ["package"]
 
     def showInst(self, obj):
         return obj.getInstName()
