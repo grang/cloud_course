@@ -14,7 +14,7 @@ from django.utils import timezone
 from apps.classroom.models import Classroom, Homework, StudentHomework
 from apps.institution.models import InstStudent, InstCourse, InstTeacher
 from apps.role.models import Teacher, Student
-from apps.course.models import Ware, Package
+from apps.course.models import Ware, Package, Material
 
 from lib.file_store import oss_save_file
 from lib.wx.base import WeixinMiniBase, WXBizDataCrypt
@@ -283,7 +283,7 @@ class ClasswareListView(View):
             for course in courses:
                 wares = Ware.objects.filter(package=course.package)
                 for ware in wares:
-                    for mat in ware.material.all():
+                    for mat in ware.material.exclude(types=Material.URL_TYPE):
                         data.append(mat.toDict())
 
             resp['data'] = data
