@@ -36,7 +36,7 @@ class PackageAdmin(admin.ModelAdmin):
         'grade'
     ]
 
-    list_filter = ['grade']
+    list_filter = ['season', 'grade']
 
 @admin.register(Ware)
 class WareAdmin(admin.ModelAdmin):

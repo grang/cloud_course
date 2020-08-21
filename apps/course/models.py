@@ -47,6 +47,14 @@ class Package(models.Model):
         (GRADE_ONE, '6年级')
     ]
 
+    SPRING, SUMMER, AUTOMER, WINTER = range(4)
+    SEASON_LIST = [
+        (SPRING, '春季'),
+        (SUMMER, '夏季'),
+        (AUTOMER, '秋季'),
+        (WINTER, '冬季')
+    ]
+
     title = models.CharField(max_length=127, verbose_name="课程名称", unique=True)
     intro = models.TextField(default="", verbose_name="课程介绍", blank=True)
 
@@ -55,6 +63,7 @@ class Package(models.Model):
     cover_img = models.URLField(default="", verbose_name="封面图片", blank=True)
     thum_img = models.URLField(default="", verbose_name="缩略图", blank=True)
 
+    season = models.PositiveSmallIntegerField(default=0, verbose_name="适用季节", choices=SEASON_LIST)
     grade = models.PositiveSmallIntegerField(default=0, verbose_name="适用年级", choices=GRADE_LIST)
     
     def __str__(self):

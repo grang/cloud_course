@@ -424,7 +424,7 @@ class WxPhoneView(View):
                             code = 101
                     else:
                         teacher = Teacher(phone=phone, name=phone, openid=openid)
-                        teacher.save() 
+                        teacher.save()
 
                         code = 101
                         phone = phone
