@@ -32,7 +32,7 @@ class PackageAdmin(admin.ModelAdmin):
     list_display = [
         'id',
         'title',
-        'count',
+        'season',
         'grade'
     ]
 
