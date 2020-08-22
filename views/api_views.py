@@ -17,7 +17,8 @@ from apps.role.models import Teacher, Student
 from apps.course.models import Ware, Package, Material
 
 from lib.file_store import oss_save_file
-# from lib.wx.base import WeixinMiniBase, WXBizDataCrypt
+from lib.wx.base import WeixinMiniBase
+
 from weixin import WXAPPAPI
 from weixin.lib.wxcrypt import WXBizDataCrypt
 from lib.IDGen import IdGenerator
