@@ -17,7 +17,9 @@ from apps.role.models import Teacher, Student
 from apps.course.models import Ware, Package, Material
 
 from lib.file_store import oss_save_file
-from lib.wx.base import WeixinMiniBase, WXBizDataCrypt
+# from lib.wx.base import WeixinMiniBase, WXBizDataCrypt
+from weixin import WXAPPAPI
+from weixin.lib.wxcrypt import WXBizDataCrypt
 from lib.IDGen import IdGenerator
 
 from yuwen.utils import get_datetime_without_sec, strp_date
@@ -398,13 +400,17 @@ class WxPhoneView(View):
                 openid = result['openid']
                 session_key = result['session_key']
 
-                pc = WXBizDataCrypt(settings.WX_MINI_APP_ID, session_key, settings.WX_MINI_APP_SECRECT)
+                api = WXAPPAPI(appid=settings.WX_MINI_APP_ID, app_secret=settings.WX_MINI_APP_SECRECT)
+                # pc = WXBizDataCrypt(settings.WX_MINI_APP_ID, session_key, settings.WX_MINI_APP_SECRECT)
                 try:
                     logger.error(data)
                     logger.error(iv)
                     logger.error(session_key)
 
-                    res = pc.decrypt(data, iv)
+                    crypt = WXBizDataCrypt(settings.WX_MINI_APP_ID, session_key)
+                    res = crypt.decrypt(data, iv)
+
+                    # res = pc.decrypt(data, iv)
                     phone = res['phoneNumber']
                     # logger.error("phone is %s" % phone)
 
