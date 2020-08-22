@@ -62,7 +62,7 @@ class WXBizDataCrypt:
         encryptedData = base64.b64decode(encryptedData)
         iv = base64.b64decode(iv)
 
-        crypt = WXBizDataCrypt(self.appId, self.session_key)
+        crypt = WXBizDataCrypt(self.appId, self.sessionKey)
         decrypted = crypt.decrypt(encryptedData, iv)
 
         # cipher = AES.new(sessionKey, AES.MODE_CBC, iv)
