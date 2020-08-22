@@ -343,7 +343,7 @@ class LoginView(View):
 
                 instStudent = InstStudent.objects.filter(student=student).first()
                 if not instStudent:
-                    instStudent = InstStudent(institution=classroom.institution, studnet=student)
+                    instStudent = InstStudent(institution=classroom.institution, student=student)
                     instStudent.save()
 
                 # 给班级添加学生
