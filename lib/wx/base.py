@@ -6,6 +6,9 @@ import json
 import base64
 from Crypto.Cipher import AES
 
+from weixin import WXAPPAPI
+from weixin.lib.wxcrypt import WXBizDataCrypt
+
 from django.conf import settings
 
 logger = logging.getLogger(__file__)
@@ -48,9 +51,10 @@ class WeixinMiniBase(object):
 
 
 class WXBizDataCrypt:
-    def __init__(self, appId, sessionKey):
+    def __init__(self, appId, sessionKey, secret):
         self.appId = appId
         self.sessionKey = sessionKey
+        self.api = WXAPPAPI(appid=appId, app_secret=secret)
 
     def decrypt(self, encryptedData, iv):
         # base64 decode
@@ -58,9 +62,11 @@ class WXBizDataCrypt:
         encryptedData = base64.b64decode(encryptedData)
         iv = base64.b64decode(iv)
 
-        cipher = AES.new(sessionKey, AES.MODE_CBC, iv)
+        crypt = WXBizDataCrypt(self.appId, self.session_key)
+        decrypted = crypt.decrypt(encryptedData, iv)
 
-        decrypted = json.loads(self._unpad(cipher.decrypt(encryptedData)))
+        # cipher = AES.new(sessionKey, AES.MODE_CBC, iv)
+        # decrypted = json.loads(self._unpad(cipher.decrypt(encryptedData)))
 
         if decrypted['watermark']['appid'] != self.appId:
             raise Exception('Invalid Buffer')

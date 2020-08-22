@@ -398,7 +398,7 @@ class WxPhoneView(View):
                 openid = result['openid']
                 session_key = result['session_key']
 
-                pc = WXBizDataCrypt(settings.WX_MINI_APP_ID, session_key)
+                pc = WXBizDataCrypt(settings.WX_MINI_APP_ID, session_key, settings.WX_MINI_APP_SECRECT)
                 try:
                     logger.error(data)
                     logger.error(iv)
