@@ -3,6 +3,7 @@ import logging
 import traceback
 import json
 import os
+import datetime
 
 from django.conf import settings
 
@@ -446,3 +447,65 @@ class WxPhoneView(View):
                 return JsonResponse({'code': obj['errcode']})
         else:
             return JsonResponse({'code': 1002})
+
+class MenuInfoView(View):
+    '''
+    获取课件端登录
+    '''
+    def post(self, request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        resp = {
+            'response': 'ok',
+        }
+
+        menu = [
+            {
+                "label": "秋季课程",
+                "children": [
+                    {
+                        "label": "3年级",
+                        "children": [
+                            {
+                                "label": "第二讲",
+                                "children": [
+                                    {
+                                        "label": "课件",
+                                        "dir": "/3/2/ppt",
+                                        "type": "html"
+                                    },
+                                    {
+                                        "label": "示范课",
+                                        "dir": "/3/2/video",
+                                        "type": "html"
+                                    }
+                                ]
+                            },
+                            {
+                                "label": "第三讲",
+                                "children": [
+                                    {
+                                        "label": "课件",
+                                        "dir": "/3/3/ppt",
+                                        "type": "html"
+                                    },
+                                    {
+                                        "label": "示范课",
+                                        "dir": "/3/3/video",
+                                        "type": "html"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+            ]
+            }
+        ]
+        resp['menu'] = menu
+
+        resp['username'] = username
+        resp['expiredDate'] = datetime.datetime.today()
+
+
+        return JsonResponse(resp)        

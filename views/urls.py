@@ -6,6 +6,7 @@ from django.conf import settings
 from views.api_views import TestView, ClassroomView, ClassroomNamesView, ClassroomInfoView, ClassroomStudents, StudentHomeworkListView, StudentInfoView, ClasswareListView
 from views.api_views import HomeworkView, HomeworkImgUpload, HomeworkUpload
 from views.api_views import LoginView, WxPhoneView
+from views.api_views import MenuInfoView
 
 urlpatterns = [
     re_path('test/$', TestView.as_view()),
@@ -44,4 +45,7 @@ urlpatterns = [
     re_path('login/$', LoginView.as_view()),
     # 电话获得
     re_path('wx_phone/$', WxPhoneView.as_view()),
+
+    # 上课用户获得页面
+    re_path('menu_info/$', MenuInfoView.as_view())
 ]
