@@ -11,6 +11,9 @@ from django.views.generic import View
 from django.http import JsonResponse
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth import authenticate
+
+from django.contrib.auth.models import User
 
 from apps.classroom.models import Classroom, Homework, StudentHomework
 from apps.institution.models import InstStudent, InstCourse, InstTeacher
@@ -431,7 +434,8 @@ class WxPhoneView(View):
                         else:
                             code = 101
                     else:
-                        teacher = Teacher(phone=phone, name=phone, openid=openid)
+                        user = User.objects.create_user(username=phone, password=settings.DEFAULT_PWD, is_active=True, first_name=phone, is_staff=True)
+                        teacher = Teacher(phone=phone, name=phone, openid=openid, user=user)
                         teacher.save()
 
                         code = 101
@@ -455,6 +459,15 @@ class MenuInfoView(View):
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
+
+        try:
+            user = authenticate(username=username, password=password)
+            if user is None:
+                return JsonResponse({'code': 1001, 'info':'用户名或者密码错误'})
+            else:
+                instTeacher = InstTeacher.objects.filter()
+        except Exception as e:
+            pass
 
         resp = {
             'response': 'ok',
@@ -505,7 +518,6 @@ class MenuInfoView(View):
         resp['menu'] = menu
 
         resp['username'] = username
-        resp['expiredDate'] = datetime.datetime.today()
+        resp['expiredDate'] = datetime.datetime.today().strftime('%Y-%m-%d')
 
-
-        return JsonResponse(resp)        
+        return JsonResponse(resp)

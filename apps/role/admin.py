@@ -106,6 +106,14 @@ class ContactAdmin(admin.ModelAdmin):
         else:
             messages.error(request, "错误：%s 的电话非法，请重新填写" % obj.name)
 
+
+def create_user(modeladmin, request, queryset):
+    for item in queryset:
+        user = User.objects.create_user(username=obj.phone, password=settings.DEFAULT_PWD, is_active=True, first_name=obj.phone, is_staff=True)
+        obj.user = user 
+        obj.save()
+create_user.short_description = '建立教师用户'     
+
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
     list_display = [
@@ -117,6 +125,10 @@ class TeacherAdmin(admin.ModelAdmin):
     readonly_fields = [
         'creator',
         'create_date'
+    ]
+
+    actions = [
+        create_user
     ]
 
     def save_model(self, request, obj, form, change):

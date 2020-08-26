@@ -46,6 +46,7 @@ class Teacher(BaseRole):
     openid = models.CharField(max_length=64, verbose_name="openid", default="", blank=True, unique=True)
     unionid = models.CharField(max_length=64, verbose_name="unionid", default="", blank=True)
     wx_session = models.CharField(max_length=64, verbose_name="微信session", default="", blank=True)
+    user = models.ForeignKey(User, verbose_name="对应账号", blank=True, null=True, on_delete=models.CASCADE, related_name="teacher_user")
 
     class Meta:
         verbose_name = "教师"

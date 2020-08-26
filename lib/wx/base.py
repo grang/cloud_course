@@ -47,9 +47,6 @@ class WeixinMiniBase(object):
 
         return result
 
-
-
-
 class WXBizDataCrypt:
     def __init__(self, appId, sessionKey, secret):
         self.appId = appId
