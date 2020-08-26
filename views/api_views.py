@@ -492,13 +492,16 @@ class MenuInfoView(View):
                                 'children': wareChildren
                             }
 
-                            packageChildren.append(wareObj)
+                            if len(wareChildren) > 0:
+                                packageChildren.append(wareObj)
                         
                         packageMenu = {
                             "label": course.package.title,
                             "children": packageChildren
                         }
-                        menu.append(packageMenu)
+
+                        if len(packageChildren) > 0:
+                            menu.append(packageMenu)
 
                 else:
                     return JsonResponse({'code': 1002, 'info':'机构下无此教师'})
