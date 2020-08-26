@@ -109,9 +109,9 @@ class ContactAdmin(admin.ModelAdmin):
 
 def create_user(modeladmin, request, queryset):
     for item in queryset:
-        user = User.objects.create_user(username=obj.phone, password=settings.DEFAULT_PWD, is_active=True, first_name=obj.phone, is_staff=True)
-        obj.user = user 
-        obj.save()
+        user = User.objects.create_user(username=item.phone, password=settings.DEFAULT_PWD, is_active=True, first_name=item.phone, is_staff=True)
+        item.user = user 
+        item.save()
 create_user.short_description = '建立教师用户'     
 
 @admin.register(Teacher)
@@ -119,7 +119,8 @@ class TeacherAdmin(admin.ModelAdmin):
     list_display = [
         'id',
         'name',
-        'phone'
+        'phone',
+        'user'
     ]
 
     readonly_fields = [
