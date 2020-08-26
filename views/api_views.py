@@ -509,10 +509,9 @@ class MenuInfoView(View):
 
         finally:
             resp = {
-                code: code,
+                'code': code,
+                'menu': menu,
+                'username': username,
+                'expiredDate': datetime.datetime.today().strftime('%Y-%m-%d')
             }
-            resp['menu'] = menu
-
-            resp['username'] = username
-            resp['expiredDate'] = datetime.datetime.today().strftime('%Y-%m-%d')
             return JsonResponse(resp)
