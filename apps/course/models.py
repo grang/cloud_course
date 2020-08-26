@@ -20,6 +20,7 @@ class Material(models.Model):
     types = models.PositiveSmallIntegerField(default=0, choices=TYPE_LIST, verbose_name="类型")
     url = models.URLField(default="", verbose_name="地址链接", blank=True)
     path = models.CharField(max_length=127, verbose_name="地址", blank=True, default="")
+    is_teacher_user = models.BooleanField(default=False, verbose_name="是否教师使用")
 
     def toDict(self):
         return {

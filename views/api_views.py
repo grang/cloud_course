@@ -478,7 +478,7 @@ class MenuInfoView(View):
                         wares = Ware.objects.filter(package=course.package)
                         for ware in wares:
                             wareChildren = []
-                            materials = ware.material.all()
+                            materials = ware.material.filter(is_teacher_user=True)
                             for material in materials:
                                 materialObj = {
                                     'label': material.title,
