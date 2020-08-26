@@ -20,7 +20,8 @@ class MaterialAdmin(admin.ModelAdmin):
     ]
 
     list_filter = [
-        'types'
+        'types',
+        'is_teacher_user'
     ]
 
     def show_view(self, obj):
