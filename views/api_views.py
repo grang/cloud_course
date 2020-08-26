@@ -460,64 +460,59 @@ class MenuInfoView(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
+        menu = []
+        code = 0
+
         try:
             user = authenticate(username=username, password=password)
             if user is None:
                 return JsonResponse({'code': 1001, 'info':'用户名或者密码错误'})
             else:
-                instTeacher = InstTeacher.objects.filter()
-        except Exception as e:
-            pass
+                instTeacher = InstTeacher.objects.filter(teacher__user=user).first()
+                if instTeacher:
+                    inst = instTeacher.institution
 
-        resp = {
-            'response': 'ok',
-        }
+                    courses = InstCourse.objects.filter(institution=inst)
+                    for course in courses:
+                        packageChildren = []
+                        wares = Ware.objects.filter(package=course.package)
+                        for ware in wares:
+                            wareChildren = []
+                            materials = ware.material.all()
+                            for material in materials:
+                                materialObj = {
+                                    'label': material.title,
+                                    'dir': material.path,
+                                    'type': material.getType()
+                                }
+                                wareChildren.append(materialObj)
 
-        menu = [
-            {
-                "label": "秋季课程",
-                "children": [
-                    {
-                        "label": "3年级",
-                        "children": [
-                            {
-                                "label": "第二讲",
-                                "children": [
-                                    {
-                                        "label": "课件",
-                                        "dir": "/3/2/ppt",
-                                        "type": "html"
-                                    },
-                                    {
-                                        "label": "示范课",
-                                        "dir": "/3/2/video",
-                                        "type": "html"
-                                    }
-                                ]
-                            },
-                            {
-                                "label": "第三讲",
-                                "children": [
-                                    {
-                                        "label": "课件",
-                                        "dir": "/3/3/ppt",
-                                        "type": "html"
-                                    },
-                                    {
-                                        "label": "示范课",
-                                        "dir": "/3/3/video",
-                                        "type": "html"
-                                    }
-                                ]
+                            wareObj = {
+                                'label': ware.title,
+                                'children': wareChildren
                             }
-                        ]
-                    }
-            ]
+
+                            packageChildren.append(wareObj)
+                        
+                        packageMenu = {
+                            "label": course.package.title,
+                            "children": packageChildren
+                        }
+                        menu.append(packageMenu)
+
+                else:
+                    return JsonResponse({'code': 1002, 'info':'机构下无此教师'})
+
+        except Exception as e:
+            logger.error(e)
+            code = 1003
+
+        finally:
+            resp = {
+                code: code,
             }
-        ]
-        resp['menu'] = menu
+            resp['menu'] = menu
 
-        resp['username'] = username
-        resp['expiredDate'] = datetime.datetime.today().strftime('%Y-%m-%d')
-
-        return JsonResponse(resp)
+            resp['username'] = username
+            resp['expiredDate'] = datetime.datetime.today().strftime('%Y-%m-%d')
+            return JsonResponse(resp)
