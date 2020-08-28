@@ -36,6 +36,11 @@ class Material(models.Model):
     def getType(self):
         return Material.TYPE_LIST[self.types][1]
 
+    def isPPT(self):
+        if self.types == self.PPT_TYPE:
+            return True
+        return False
+    
     class Meta:
         verbose_name = u"资料"
         verbose_name_plural = verbose_name

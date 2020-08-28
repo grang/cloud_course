@@ -25,7 +25,10 @@ class MaterialAdmin(admin.ModelAdmin):
     ]
 
     def show_view(self, obj):
-        return mark_safe("<a href='%s' target='_blank'>查看</a>" % obj.url)
+        if obj.isPPT():
+            return ""
+        else:
+            return mark_safe("<a href='%s' target='_blank'>查看</a>" % obj.url)
     show_view.short_description = u"查看"
 
 @admin.register(Package)
