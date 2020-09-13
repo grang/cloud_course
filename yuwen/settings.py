@@ -56,8 +56,10 @@ INSTALLED_APPS = [
     'apps.role',
     'apps.institution',
     'apps.classroom',
+    'apps.classware',
 
-    'views'
+    'views',
+    'classware_views'
 ]
 
 MIDDLEWARE = [
@@ -73,12 +75,13 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
+STATIC_PATH = '/static/'
 ROOT_URLCONF = 'yuwen.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1">
+<meta name=apple-mobile-web-app-capable content=yes>
+<meta name=apple-mobile-web-app-status-bar-style content=black>
+<meta name=format-detection content="telephone=no">
+ <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
+<title>课件</title>
+{% if  DEBUG %}
+ <link href=/static/dist/debug/app/css/app.css rel=stylesheet>
+{% else %}
+<link href=/static/dist/prod/app/css/vendors.css rel=stylesheet>
+ <link href=/static/dist/prod/app/css/app.css rel=stylesheet>
+{% endif %}
+
+</head>
+<body >
+<div class="app" id="app"></div>
+	{% if  DEBUG %}
+		<script type=text/javascript src='/static/dist/debug/app/app.js?{{version}}'></script>
+    {% else %}
+    	<script type=text/javascript src=/static/dist/prod/app/js/runtime.js></script>
+		<script type=text/javascript src=/static/dist/prod/app/js/vendors.js></script>
+		<script type=text/javascript src=/static/dist/prod/app/js/app.js?{{version}}'></script>
+	{% endif %}
+</body>
+
+</html>
+
