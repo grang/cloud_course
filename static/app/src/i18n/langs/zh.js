@@ -1,5 +1,5 @@
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
-const cn = {
+const zh = {
   message: {
     'logout': '退出',
     'login_welcome': '欢迎来到玩创Lab',
@@ -8,7 +8,7 @@ const cn = {
     'fullscreen': '全屏',
     'login_btn': '登 录',
     'expired_time': '过期时间',
-    version: '版本号：',
+    'version': '版本号：',
     'back_btn': '返回'
   },
   errors: {
@@ -17,4 +17,4 @@ const cn = {
   },
   ...zhLocale
 }
-export default cn
+export default zh

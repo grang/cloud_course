@@ -61,8 +61,8 @@
         	},
             logout() {
             	var self = this;
-            	self.$store.commit(types.LOGOUT);
-            	window.location.href = '/logout/';
+				self.$store.commit(types.LOGOUT);
+            	window.location.href = '/classware/logout/';
             },
             clickFullscreen() {
    				this.$parent.fullScreen();

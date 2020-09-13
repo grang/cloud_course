@@ -17,11 +17,12 @@ const mutations = {
 	[types.LOGIN](state, data){
 		state.user = data.user;
 		localStorage.setItem('user', JSON.stringify(data.user));
-    },
-    [types.LOGOUT](state){
-        localStorage.removeItem('user');
+  },
+  [types.LOGOUT](state){
+    console.log("on logout");
+    localStorage.removeItem('user');
 		state.user = {};
-    }
+  }
 }
 
 export default new Vuex.Store({

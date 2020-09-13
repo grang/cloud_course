@@ -384,7 +384,7 @@ input, select, textarea{
 
 .app-header {
 	z-index: 1025;
-	background: #2c3a4b;
+	background: #EC474B;
 	line-height: 60px;
 	height: 60px;
 	position: fixed;
@@ -465,7 +465,7 @@ input, select, textarea{
 }
 
 .app-side {
-	background-color: #37597e;
+	background-color: #ffffff;
 	width: 220px;
 	position: absolute;
 	top: 0px;
@@ -500,7 +500,7 @@ input, select, textarea{
 
 .menu-wrap {
     position: relative;
-    background-color: #37597e;
+    background-color: #ffffff;
     width: 100%;
     font-size:14px;
     border: 0px solid red;
@@ -508,8 +508,8 @@ input, select, textarea{
 }
 
 .menu-wrap .el-tree{
-	background-color: #37597e;
-	color: #A7C3E2;
+	background-color: #ffffff;
+	color: #000000;
 	width: 100%;
 }
 
@@ -521,12 +521,12 @@ input, select, textarea{
 	font-size: 13px;
 }
 .menu-wrap .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
-    color: #fff;
-    background-color: #43a0fc;
+    color: #000000;
+    background-color: #EC474B;
 }
 .menu-wrap .el-tree-node__content:hover {
-	color: #fff;
-    background-color: #456483;
+	color: #000000;
+    background-color: #EC474B;
 }
 .menu-wrap .el-tree-node:focus>.el-tree-node__content {
 	color: #fff;

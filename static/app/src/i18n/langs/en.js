@@ -8,7 +8,7 @@ const en = {
     'fullscreen': 'Fullscreen',
     'login_btn': 'Login',
     'expired_time': 'Expired Time',
-    version: 'version: ',
+    'version': 'version: ',
     'back_btn': 'back'
   },
   errors: {

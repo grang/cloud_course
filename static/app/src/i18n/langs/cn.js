@@ -8,7 +8,7 @@ const cn = {
     'fullscreen': '全屏',
     'login_btn': '登 录',
     'expired_time': '过期时间',
-    version: '版本号：',
+    'version': '版本号：',
     'back_btn': '返回'
   },
   errors: {
