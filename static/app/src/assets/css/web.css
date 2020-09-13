@@ -1,0 +1,81 @@
+
+
+
+
+
+
+
+
+
+.login-container {
+    min-height: 100%;
+    width: 100%;
+    background-color: #2d3a4b;
+    overflow: hidden;
+    display: flex;
+}
+
+.login-container .login-form {
+    position: relative;
+    width: 520px;
+    margin: auto auto;
+    overflow: hidden;
+}
+
+.login-container .title-container{
+	display: flex;
+	justify-content: center;
+	padding: 20px 0;
+	margin-bottom: 20px;
+}
+
+.login-container .title-container .logo{
+	max-height: 70px;
+}
+
+.login-container .title-container .title{
+    font-size: 26px;
+    color: #eee;
+    margin: 0px auto 40px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.login-container .el-form-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #454545;
+}
+.login-container .el-input input {
+    background: transparent;
+    border: 0px;
+    -webkit-appearance: none;
+    border-radius: 0px;
+    padding: 12px 5px 12px 15px;
+    color: #fff;
+    height: 47px;
+    caret-color: #fff;
+}
+
+.login-container .footer {
+    text-align: center;
+    color: #eee;
+}
+
+
+
+
+
+.player {
+	position: relative;
+	width: 100%;
+    height: 100%;
+	border: 0px solid blue;
+}
+
+.player-iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}

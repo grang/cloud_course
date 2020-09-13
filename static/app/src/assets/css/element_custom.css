@@ -1,0 +1,94 @@
+
+
+.loading-box{
+	position: relative;
+	margin: 0 auto;
+	padding: 50px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-box .loading{
+	margin:0 auto;
+	max-height: 50px;
+}
+
+.el-table{
+	color: #444;
+	width: 100%;
+	font-size: 12px;
+}
+.el-table thead{
+	color: #333;
+}
+
+.el-table--medium td, .el-table--medium th {
+    padding: 8px 0;
+}
+
+
+.el-form{
+	//width: 80%;
+	margin-top: 20px;
+	font-size: 13px;
+}
+
+.detail-form.el-form{
+	width: 80%;
+	margin-left: 50px;
+	margin-top: 20px;
+	width: 750px;
+	font-size: 13px;
+}
+
+.detail-form .el-form-item__label{
+	color: #333;
+	padding-right: 30px;
+	font-weight: 700;
+	font-size: 13px;
+	width: 150px;
+	border: 1px solid #fff;
+}
+
+
+.el-input--medium{
+	//width: 350px;
+}
+
+
+.list-search-bar .el-input--medium {
+	width: 160px;
+}
+
+.el-dialog__body{
+	overflow: hidden;
+	padding: 10px 10px;
+}
+
+
+.el-menu-item, .el-submenu__title {
+    height: 35px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.el-menu-item, .el-submenu__title{
+	font-size: 12px;
+}
+
+.el-submenu .el-menu-item{
+	height: 30px;
+    line-height: 1;
+    padding-left: 45px !important; 
+    display: flex;
+    align-items: center;
+}
+
+.el-menu .el-menu-item span{
+	display: flex;
+    align-items: center;
+    border: 0px solid red;
+}
+
