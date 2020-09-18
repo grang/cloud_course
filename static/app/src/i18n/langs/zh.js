@@ -3,8 +3,8 @@ const zh = {
   message: {
     'logout': '退出',
     'login_welcome': '欢迎来到玩创Lab',
-    'username_input': '请输入用户名',
-    'password_input': '请输入密码',
+    'username_input': '    输入用户名',
+    'password_input': '    输入密码',
     'fullscreen': '全屏',
     'login_btn': '登 录',
     'expired_time': '过期时间',

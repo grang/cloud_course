@@ -14,6 +14,8 @@ axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = '';
+// axios.defaults.baseURL = '/classware';
+
 
 // http request 拦截器
 axios.interceptors.request.use(

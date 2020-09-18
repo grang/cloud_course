@@ -1,26 +1,65 @@
 <template>
-  <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" class="login-form" autocomplete="on" label-position="left">
+	<div class="login-container" :style="setBackground">
+		<div class="content" :style="contentBackground">
+			<div class="left">
+				<img src="../../assets/images/left.png" width="80%" height="80%"/>
+			</div>
+			<div class="right">
+				<img  src="../../assets/images/title_logo.png" width="80%" height="80%"/>
+				<div>
+				<el-form 
+					ref="loginForm" 
+					:model="loginForm"  
+					autocomplete="on" 
+				>
+					<el-form-item>
+						<el-input 
+							ref="username" 
+							v-model="loginForm.username" 
+							:placeholder="$t('message.username_input')"
+							prefix-icon="el-icon-user-solid"
+						>
+							<!-- <i slot="prefix" style="display: flex;align-items: center;">
+							<img
+								style="width:18px;height:22px"
+								src="../../assets/images/username_icon.png"
+								alt
+							/>
+							</i> -->
+						</el-input>
+					</el-form-item>
+					<el-form-item>
+						<el-input 
+							type="password" 
+							v-model="loginForm.password" 
+							:placeholder="$t('message.password_input')" 
+							@keyup.enter.native="login"
+							prefix-icon="el-icon-lock"
+						>
+							<!-- <i slot="prefix" style="display: flex;align-items: center;">
+							<img
+								style="width:18px;height:22px"
+								src="../../assets/images/pwd_icon.png"
+								alt
+							/>
+							</i> -->
+						</el-input>
+					</el-form-item>
 
-      <div class="title-container">
-      	<img class="logo" src="/static/images/chinese_icon.png"/>
-      </div>
-      
-	<el-form-item label="">
-		<el-input ref="username" v-model="loginForm.username" :placeholder="$t('message.username_input')"></el-input>
-	</el-form-item>
-	<el-form-item label="">
-		<el-input type="password" v-model="loginForm.password" :placeholder="$t('message.password_input')" @keyup.enter.native="login"></el-input>
-	</el-form-item>
-      
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="login">{{$t('message.login_btn')}}</el-button>
-
-      <div class="footer">
-        <h5>{{$t('message.version')}} {{ version }}</h5>
-      </div>
-    </el-form>
-
-  </div>
+					<el-button 
+						:loading="loading" 
+						round
+						type="danger"
+						style="width:100%;margin-bottom:30px;" 
+						@click.native.prevent="login"
+					>{{$t('message.login_btn')}}
+					</el-button>
+				</el-form>
+				</div>
+			</div>
+		</div>
+		
+	</div>
 </template>
 
 <script>
@@ -38,12 +77,18 @@ export default {
 				password : ''
 			},
 			loading : false,
-			version : userConfig.version
+			version : userConfig.version,
+			setBackground: {
+				backgroundImage: "url(" + require("../../assets/images/back.png") + ")",
+			},
+			contentBackground: {
+				backgroundImage: "url(" + require("../../assets/images/contentBack.png") + ")",
+			}
 		}
 	},
 	created () {},
 	mounted () {
-		this.$refs.username.focus()
+		// this.$refs.username.focus()
 	},
 	methods: {
 		login(event){

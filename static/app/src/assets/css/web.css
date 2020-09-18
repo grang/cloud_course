@@ -1,11 +1,56 @@
 
 .login-container {
+    object-fit: fill;
     min-height: 100%;
     width: 100%;
-    background-color: #EC474B;
     overflow: hidden;
-    display: flex;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
+
+.login-container .content {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin:0 auto;
+    min-height: 65%;
+    object-fit: fill;
+    position: absolute;
+    left:50%; 
+    top:50%; 
+    transform:translate(-50%,-50%);
+    text-align: center;
+    display: table;
+    border-radius:10px 0;
+}
+
+.login-container .content .left {
+    text-align: left;
+    vertical-align: middle;
+
+    display: table-cell;
+    padding-left: 20px;
+}
+
+.login-container .content .right {
+    text-align: center;
+    vertical-align: middle;
+
+    display: table-cell;
+    padding-right: 20px;
+    margin: 0 auto;
+}
+
+.login-container .content .right .icon {
+    text-align: right;
+}
+
+.input {
+    border: none;
+    border-bottom: #fff;
+}
+
 
 /* .login-container .login-sub-container {
     display: inline;
@@ -21,17 +66,7 @@
     overflow: hidden;
 }
 
-.login-container .title-left {
-    display: inline-block;
-	padding: 20px 0;
-	margin-bottom: 20px;
-}
-
-.login-container .title-left .logo {
-    max-height: 200px;
-}
-
-.login-container .title-container{
+/* .login-container .title-container{
 	display: flex;
 	justify-content: center;
 	padding: 20px 0;
@@ -56,24 +91,18 @@
     border-radius: 5px;
     color: #454545;
 }
+*/
+
 .login-container .el-input input {
     background: transparent;
     border: 0px;
     -webkit-appearance: none;
-    border-radius: 0px;
-    padding: 12px 5px 12px 15px;
-    color: #fff;
+    color: #000;
     height: 47px;
     caret-color: #fff;
+    border-bottom: #000 1px solid;
+    border-radius: 0px;
 }
-
-.login-container .footer {
-    text-align: center;
-    color: #eee;
-}
-
-
-
 
 
 .player {
