@@ -5,7 +5,7 @@ django 命令行脚本用, 在py文件里如果有model 直接用命令python a.
 
 import os
 
-settings_name = 'yuwen.settings'
+settings_name = 'cloud_course.settings'
 #try:
 #    from online_course_server.dev_settings import *
 #    settings_name = 'online_course_server.dev_settings'

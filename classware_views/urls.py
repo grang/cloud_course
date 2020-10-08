@@ -17,9 +17,6 @@ urlpatterns = [
     
     re_path('^common/curuser/$', CurUserView.as_view()),
     re_path('^common/menu/$', MyMenuView.as_view()),
-    
-    
-    
 ]
 
 

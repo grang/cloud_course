@@ -5,7 +5,13 @@
 				<img src="../../assets/images/left.png" width="80%" height="80%"/>
 			</div>
 			<div class="right">
-				<img  src="../../assets/images/title_logo.png" width="80%" height="80%"/>
+				<!-- <el-image
+					src="../../assets/images/title_logo.png"
+					fit="contain"
+					lazy
+				>
+				</el-image> -->
+				<img class="logo"  src="../../assets/images/title_logo.png" />
 				<div>
 				<el-form 
 					ref="loginForm" 

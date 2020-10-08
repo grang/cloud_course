@@ -42,6 +42,11 @@
     margin: 0 auto;
 }
 
+.login-container .content .right .logo {
+    object-fit: contain;
+    height: 90px;
+}
+
 .login-container .content .right .icon {
     text-align: right;
 }

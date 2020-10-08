@@ -1,6 +1,12 @@
 <template>
 <div class="menu-wrap">
-	<el-tree :data="menu_list" :props="defaultProps" :highlight-current="true" @node-click="clickNode"></el-tree>
+	<el-tree 
+    :data="menu_list" 
+    :props="defaultProps" 
+    :highlight-current="true" 
+    @node-click="clickNode"
+  >
+  </el-tree>
 </div>
 
 </template>
@@ -25,12 +31,12 @@
     },
     mounted: function () {
     	var self = this;
-		var url = "/common/menu/";
-		http.get(url).then(res => {
-			if(res.response=='ok'){
-				self.menu_list = res.menu;
-			}
-		});
+      var url = "/common/menu/";
+      http.get(url).then(res => {
+        if(res.response=='ok'){
+          self.menu_list = res.menu;
+        }
+      });
 		
 		
     },

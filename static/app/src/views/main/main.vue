@@ -9,7 +9,17 @@
 	<div class="app-content">
 		
 		<div v-if="iframeSrc" class="player">
-			<iframe class="player-iframe" :src="iframeSrc" @load='iframeLoaded' id="iframe" name="mainIframe" ref="mainIframe" allowFullScreen="true" frameborder="no" border="0" />
+			<iframe 
+				class="player-iframe" 
+				:src="iframeSrc" 
+				@load='iframeLoaded' 
+				id="iframe" 
+				name="mainIframe" 
+				ref="mainIframe" 
+				allowFullScreen="true" 
+				frameborder="no" 
+				border="0" 
+			/>
 	  	</div>
 	  	
 	</div>

@@ -1,7 +1,7 @@
 <template>
 	<div class="app-header">
 		<div class="header-logo">
-	          <img class="logo" src="/static/images/chinese_icon.png"/>
+	          <img class="logo" src="../../assets/images/title_logo.png"/>
         </div>
       
       <div class="nav-status hide" v-if="$store.state.user.id">;

@@ -18,7 +18,7 @@ class ClasswareUser(models.Model):
         return "%s" % (self.username)
 
     class Meta:
-        verbose_name = "云课系统web账号"
+        verbose_name = "Account"
     
     @staticmethod
     def encrypt_password(pwd):
