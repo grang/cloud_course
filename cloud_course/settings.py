@@ -94,8 +94,9 @@ WSGI_APPLICATION = 'cloud_course.wsgi.application'
 DB_ENGINE = "django.db.backends.postgresql_psycopg2"
 DB_NAME = "cloud_course"
 DB_USER = "postgres"
-DB_PWD = "112358"
-DB_HOST = "127.0.0.1"
+DB_PWD = "11235813"
+DB_HOST = "database-1.cl4q4iof1usm.ca-central-1.rds.amazonaws.com"
+# DB_HOST = "127.0.0.1"
 
 DATABASES = {
     'default': {
