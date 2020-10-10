@@ -92,8 +92,8 @@ WSGI_APPLICATION = 'cloud_course.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DB_ENGINE = "django.db.backends.postgresql_psycopg2"
-DB_NAME = "database-2"
-# DB_NAME = "cloud_course"
+# DB_NAME = "database-2"
+DB_NAME = "cloud_course"
 DB_USER = "postgres"
 DB_PWD = "11235813"
 DB_HOST = "database-2.cl4q4iof1usm.ca-central-1.rds.amazonaws.com"
