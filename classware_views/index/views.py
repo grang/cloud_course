@@ -33,8 +33,8 @@ class LogoutView(View):
         for sesskey in request.session.keys():
             del request.session[sesskey]
 
-        return HttpResponseRedirect('http://106.52.92.203:7000/dist')  
-        # return HttpResponseRedirect(reverse('index'))
+        # return HttpResponseRedirect('http://106.52.92.203:7000/dist')  
+        return HttpResponseRedirect(reverse('index'))
 
 
 class LoginView(View):
