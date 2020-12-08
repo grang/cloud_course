@@ -384,7 +384,7 @@ input, select, textarea{
 
 .app-header {
 	z-index: 1025;
-	background: #EC474B;
+	background: #64D6EA;
 	line-height: 60px;
 	height: 60px;
 	position: fixed;
@@ -525,15 +525,15 @@ input, select, textarea{
 	font-size: 15px;
 }
 .menu-wrap .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
-	background-color: #EC474B;
+	background-color: #64D6EA;
 	color: #fff;
 
 }
 .menu-wrap .el-tree-node__content:hover {
 	color: #000000;
-    background-color: #EC474B;
+    background-color: #64D6EA;
 }
 .menu-wrap .el-tree-node:focus>.el-tree-node__content {
 	color: #fff;
-    background-color: #43a0fc;
+    background-color: #64D6EA;
 }

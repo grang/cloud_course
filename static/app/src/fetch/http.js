@@ -13,8 +13,8 @@ axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 //'X-CSRFToken':mos.getToken()
 
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = '';
-// axios.defaults.baseURL = '/classware';
+// axios.defaults.baseURL = '';
+axios.defaults.baseURL = '/classware';
 
 
 // http request 拦截器

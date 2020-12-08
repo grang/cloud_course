@@ -15,7 +15,7 @@ var type = navigator.appName;
 lang = lang.substr(0, 2);//获取浏览器配置语言前两位
 
 const i18n = new VueI18n({
-  locale: lang || 'zh',
+  locale: lang || 'en',
   messages
 })
 locale.i18n((key, value) => i18n.t(key, value))

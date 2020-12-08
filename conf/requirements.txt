@@ -1,0 +1,8 @@
+django
+django-jet
+django-cors-headers
+six
+psycopg2-binary
+ujson
+supervisor
+uwsgi

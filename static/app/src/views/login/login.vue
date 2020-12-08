@@ -1,5 +1,5 @@
 <template>
-	<div class="login-container" :style="setBackground">
+	<div class="login-container">
 		<div class="content" :style="contentBackground">
 			<div class="left">
 				<img src="../../assets/images/left.png" width="80%" height="80%"/>
@@ -11,7 +11,7 @@
 					lazy
 				>
 				</el-image> -->
-				<img class="logo"  src="../../assets/images/title_logo.png" />
+				<img class="logo"  src="../../assets/images/title_logo.png"  />
 				<div>
 				<el-form 
 					ref="loginForm" 
@@ -55,7 +55,7 @@
 					<el-button 
 						:loading="loading" 
 						round
-						type="danger"
+						type="primary"
 						style="width:100%;margin-bottom:30px;" 
 						@click.native.prevent="login"
 					>{{$t('message.login_btn')}}
@@ -84,9 +84,9 @@ export default {
 			},
 			loading : false,
 			version : userConfig.version,
-			setBackground: {
-				backgroundImage: "url(" + require("../../assets/images/back.png") + ")",
-			},
+			// setBackground: {
+			// 	backgroundImage: "url(" + require("../../assets/images/back.png") + ")",
+			// },
 			contentBackground: {
 				backgroundImage: "url(" + require("../../assets/images/contentBack.png") + ")",
 			}
