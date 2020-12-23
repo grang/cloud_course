@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     'localhost', 
     '127.0.0.1', 
     '15.223.67.128',
+    '52.90.56.66',
     'cloud.playnovate.com'
 ]
 

@@ -103,7 +103,7 @@ module.exports = {
 	parallel : require('os').cpus().length > 1, // 是否为 Babel 或 TypeScript 使用 thread-loader。该选项在系统的 CPU 有多于一个内核时自动启用，仅作用于生产构建。
 	pwa : {}, // PWA 插件相关配置 see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
 	devServer : {
-		proxy: 'http://127.0.0.1:8000/classware'
+		proxy: 'http://3.96.146.157/classware'
 	},
 	// 第三方插件配置
 	pluginOptions : {
